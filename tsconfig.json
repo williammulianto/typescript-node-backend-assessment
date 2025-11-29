@@ -11,7 +11,8 @@
     "experimentalDecorators": true,
     "outDir": "dist",
     "paths": {
-      "utils/*": ["utils/*"]
+      "utils/*": ["utils/*"],
+      "entities/*": ["entities/*"]
     }
   },
   "include": ["src/**/*"]

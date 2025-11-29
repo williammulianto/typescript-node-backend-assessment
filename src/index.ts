@@ -1,26 +1,18 @@
-import 'dotenv/config';
-import express from 'express';
+import { Database } from 'utils/db';
+import { Bootstrap } from './application';
+import config from '../mikro-orm.config';
 import { applicationConfig } from 'utils/config';
 
-const app = express();
-
-app.use(express.json());
-
-app.get('/', async (req: express.Request, res: express.Response) => {
+async function start() {
   try {
-    res.send('Hello world!');
-  } catch (err) {
-    console.log(err);
+    const db = await Database.init(config);
+    const port = applicationConfig.server.port;
+    const bootstrap = new Bootstrap(db, port);
+    bootstrap.init();
+    bootstrap.start();
+  } catch (e) {
+    console.error(e);
   }
-});
-
-// Start backend server
-const PORT = applicationConfig.server.port;
-
-if (applicationConfig.server.environment !== 'test') {
-  app.listen(PORT, () => {
-    console.log(`Backend server is running at port ${PORT}`);
-  });
 }
 
-export default app;
+start();
