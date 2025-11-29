@@ -1,4 +1,5 @@
 import { defineConfig } from 'vitest/config';
+import path from 'path';
 
 export default defineConfig({
   test: {
@@ -13,6 +14,11 @@ export default defineConfig({
     },
     env: {
       NODE_ENV: 'test',
+    },
+  },
+  resolve: {
+    alias: {
+      utils: path.resolve(__dirname, 'src/utils'),
     },
   },
 });

@@ -1,5 +1,6 @@
 import 'dotenv/config';
 import express from 'express';
+import { applicationConfig } from 'utils/config';
 
 const app = express();
 
@@ -14,9 +15,9 @@ app.get('/', async (req: express.Request, res: express.Response) => {
 });
 
 // Start backend server
-const PORT = process.env.PORT || 8800;
+const PORT = applicationConfig.server.port;
 
-if (process.env.NODE_ENV !== 'test') {
+if (applicationConfig.server.environment !== 'test') {
   app.listen(PORT, () => {
     console.log(`Backend server is running at port ${PORT}`);
   });

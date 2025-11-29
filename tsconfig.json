@@ -6,8 +6,13 @@
     "baseUrl": "src",
     "noImplicitAny": true,
     "sourceMap": true,
+    "emitDecoratorMetadata": true,
     "esModuleInterop": true,
-    "outDir": "dist"
+    "experimentalDecorators": true,
+    "outDir": "dist",
+    "paths": {
+      "utils/*": ["utils/*"]
+    }
   },
   "include": ["src/**/*"]
 }
