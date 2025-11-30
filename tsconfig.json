@@ -12,7 +12,8 @@
     "outDir": "dist",
     "paths": {
       "utils/*": ["utils/*"],
-      "entities/*": ["entities/*"]
+      "entities/*": ["entities/*"],
+      "modules/*": ["modules/*"]
     }
   },
   "include": ["src/**/*"]

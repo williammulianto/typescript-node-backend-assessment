@@ -20,6 +20,7 @@ export default defineConfig({
     alias: {
       utils: path.resolve(__dirname, 'src/utils'),
       entities: path.resolve(__dirname, 'src/entities'),
+      modules: path.resolve(__dirname, 'src/modules'),
     },
   },
 });
