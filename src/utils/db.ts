@@ -10,9 +10,7 @@ export class Database {
 
   public projectRepository: EntityRepository<Project>;
 
-  constructor() {
-    console.log('Initializing database..');
-  }
+  constructor() {}
 
   public static async init(option?: Options) {
     if (!Database.instance) {

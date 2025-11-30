@@ -73,6 +73,34 @@ describe('Project API Integration Tests', () => {
       const foundProject = getAllResponse.body.find((p: any) => p.id === projectId);
       expect(foundProject).toBeDefined();
       expect(foundProject.name).toBe('Workflow Test Project');
+
+      const updatePayload = {
+        name: 'Update Test',
+        description: 'Update Description',
+        isArchived: true,
+        startDate: '2024-03-01',
+        endDate: '2024-09-30',
+      };
+      const updateResponse = await request(app).post(`/projects/${projectId}`).send(updatePayload);
+
+      expect(updateResponse.body.name).toBe('Update Test');
+      expect(updateResponse.body.description).toBe('Update Description');
+      expect(updateResponse.body.isArchived).toBe(true);
+
+      const getIdAfterUpdate = await request(app).get(`/projects/${projectId}`);
+      expect(getIdAfterUpdate.status).toBe(200);
+
+      expect(getIdAfterUpdate.body.name).toBe('Update Test');
+      expect(getIdAfterUpdate.body.description).toBe('Update Description');
+      expect(getIdAfterUpdate.body.isArchived).toBe(true);
+
+      const deleteResponse = await request(app).delete(`/projects/${projectId}`).send();
+
+      const getIdAfterDelete = await request(app).get(`/projects/${projectId}`);
+      expect(getIdAfterDelete.status).toBe(404);
+
+      const getAllAfterDelete = await request(app).get(`/projects`);
+      expect(getIdAfterUpdate.body).toBe([]);
     });
   });
 });

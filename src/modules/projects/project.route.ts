@@ -2,6 +2,7 @@ import { BaseRoute } from 'utils/base-route';
 import { ProjectController } from './project.controller';
 import { CreateProjectDto } from './dto/CreateProjectDto';
 import { validateDto } from 'middlewares/class-validator.middleware';
+import { UpdateProjectDto } from './dto/UpdateProjectDto';
 
 export class ProjectRoute extends BaseRoute {
   constructor(private projectController: ProjectController) {
@@ -12,5 +13,7 @@ export class ProjectRoute extends BaseRoute {
     this.get('/', this.projectController.getAll);
     this.get('/:id', this.projectController.getById);
     this.post('/', validateDto(CreateProjectDto), this.projectController.create);
+    this.post('/:id', validateDto(UpdateProjectDto), this.projectController.update);
+    this.delete('/:id', this.projectController.delete);
   }
 }

@@ -40,4 +40,30 @@ export class ProjectController {
       next(err);
     }
   };
+
+  update = async (
+    req: Request<{ id: string }, ProjectDto, CreateProjectDto>,
+    res: Response,
+    next: NextFunction
+  ) => {
+    try {
+      const result = await this.projectService.updateProject(req.body, req.params.id);
+      res.status(201).json(result);
+    } catch (err) {
+      next(err);
+    }
+  };
+
+  delete = async (
+    req: Request<{ id: string }, ProjectDto, {}>,
+    res: Response,
+    next: NextFunction
+  ) => {
+    try {
+      const result = await this.projectService.deleteProject(req.params.id);
+      res.json(result);
+    } catch (err) {
+      next(err);
+    }
+  };
 }

@@ -1,0 +1,22 @@
+meta {
+  name: Delete Project
+  type: http
+  seq: 5
+}
+
+delete {
+  url: {{url}}/projects/927727ad-db51-42b1-9610-44d7d5a25688
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "name": "asd",
+    "description": "This is a sample project description.",
+    "isArchived": false,
+    "startDate": "2025-01-01T00:00:00.000Z",
+    "endDate": "2025-02-01T00:00:00.000Z"
+    
+  }
+}

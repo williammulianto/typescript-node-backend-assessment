@@ -35,7 +35,6 @@ export class Bootstrap {
   }
 
   public start() {
-    console.log(`server started at ${this.port}`);
     this.app.listen(this.port);
   }
 
