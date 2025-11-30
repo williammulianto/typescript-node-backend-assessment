@@ -5,6 +5,7 @@ import { validateDateRange } from 'utils/validation';
 import { NotFoundError, ValidationError } from 'utils/errors';
 import { PROJECT_ERROR_CODE } from './errors/project.error_code';
 import { Project } from 'entities/Project';
+import { UpdateProjectDto } from './dto/UpdateProjectDto';
 
 export class ProjectService {
   constructor(
@@ -13,13 +14,15 @@ export class ProjectService {
   ) {}
 
   async getAllProjects() {
-    const projects = await this.projectRepo.find({});
+    const projects = await this.projectRepo.find({
+      deletedAt: null,
+    });
     const projectsDto = projects.map((p) => this.mapToDto(p));
     return projectsDto;
   }
 
   async getProjectById(id: string) {
-    const project = await this.projectRepo.findOne({ id: id });
+    const project = await this.projectRepo.findOne({ id: id, deletedAt: null });
     if (!project) {
       throw new NotFoundError('Project not found.');
     }
@@ -46,11 +49,52 @@ export class ProjectService {
     return this.mapToDto(entity);
   }
 
+  async updateProject(data: UpdateProjectDto, id: string) {
+    if (validateDateRange(data.startDate, data.endDate) == false) {
+      throw new ValidationError(
+        'Please check if date is valid data and endDate is greater than startDate',
+        PROJECT_ERROR_CODE.INVALID_DATE
+      );
+    }
+
+    const entity = await this.projectRepo.findOne({
+      id: id,
+      deletedAt: null,
+    });
+
+    if (!entity) {
+      throw new NotFoundError('Project not found.');
+    }
+    entity.name = data.name;
+    entity.description = data.description;
+    entity.isArchived = data.isArchived;
+    entity.startDate = new Date(data.startDate);
+    entity.endDate = new Date(data.endDate);
+    await this.em.persistAndFlush(entity);
+    return this.mapToDto(entity);
+  }
+
+  async deleteProject(id: string) {
+    const project = await this.projectRepo.findOne({
+      id: id,
+    });
+
+    if (!project) {
+      throw new NotFoundError('Project not found.');
+    }
+    project.deletedAt = new Date();
+    await this.em.persistAndFlush(project);
+    return this.mapToDto(project);
+  }
+
   mapToDto(entity: Project): ProjectDto {
     return {
       id: entity.id,
       name: entity.name,
       description: entity.description,
+      isArchived: entity.isArchived,
+      startDate: entity.startDate,
+      endDate: entity.endDate,
       createdAt: entity.createdAt,
       updatedAt: entity.updatedAt,
     };
