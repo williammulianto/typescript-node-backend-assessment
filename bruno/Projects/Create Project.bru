@@ -1,0 +1,21 @@
+meta {
+  name: Create Project
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{url}}/projects
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "name": "New Project",
+    "description": "This is a sample project description.",
+    "isArchived": false,
+    "startDate": "2025-01-01T00:00:00.000Z",
+    "endDate": "2025-02-01T00:00:00.000Z"
+  }
+}

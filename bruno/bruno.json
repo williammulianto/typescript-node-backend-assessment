@@ -1,0 +1,7 @@
+{
+  "version": "1",
+  "name": "project_task",
+  "type": "collection",
+  "ignore": ["node_modules", ".git"]
+}
+

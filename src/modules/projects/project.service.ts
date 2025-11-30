@@ -1,10 +1,10 @@
 import { EntityManager, EntityRepository } from '@mikro-orm/sqlite';
-import { Project } from 'entities/Project';
 import { CreateProjectDto } from './dto/CreateProjectDto';
 import { ProjectDto } from './dto/ProjectDto';
 import { validateDateRange } from 'utils/validation';
 import { NotFoundError, ValidationError } from 'utils/errors';
 import { PROJECT_ERROR_CODE } from './errors/project.error_code';
+import { Project } from 'entities/Project';
 
 export class ProjectService {
   constructor(

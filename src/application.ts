@@ -4,6 +4,7 @@ import { Database } from 'utils/db';
 import { ProjectService } from 'modules/projects/project.service';
 import { ProjectController } from 'modules/projects/project.controller';
 import { ProjectRoute } from 'modules/projects/project.route';
+import { errorHandler } from 'middlewares/error.middleware';
 
 export class Bootstrap {
   private app: Express;
@@ -21,10 +22,15 @@ export class Bootstrap {
       RequestContext.create(this.db.em, next);
     });
 
+    this.registerRoutes();
+
+    this.app.use(errorHandler);
+  }
+
+  public registerRoutes() {
     const projectService = new ProjectService(this.db.projectRepository, this.db.em);
     const projectController = new ProjectController(projectService);
     const projectRoute = new ProjectRoute(projectController);
-
     this.app.use(projectRoute.prefix, projectRoute.route);
   }
 
