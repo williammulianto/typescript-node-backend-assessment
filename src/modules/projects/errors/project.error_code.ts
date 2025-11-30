@@ -1,0 +1,3 @@
+export const PROJECT_ERROR_CODE = {
+  INVALID_DATE: 'INVALID_DATE',
+};

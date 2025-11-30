@@ -11,4 +11,10 @@ export class Project extends BaseEntity {
 
   @Property({ default: false })
   isArchived: boolean = false;
+
+  @Property({ type: 'timestamp' })
+  startDate: Date;
+
+  @Property({ type: 'timestamp' })
+  endDate: Date;
 }
