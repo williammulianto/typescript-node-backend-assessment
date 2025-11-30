@@ -3,7 +3,7 @@ import { Project } from 'entities/Project';
 import { CreateProjectDto } from './dto/CreateProjectDto';
 import { ProjectDto } from './dto/ProjectDto';
 import { validateDateRange } from 'utils/validation';
-import { ValidationError } from 'utils/errors';
+import { NotFoundError, ValidationError } from 'utils/errors';
 import { PROJECT_ERROR_CODE } from './errors/project.error_code';
 
 export class ProjectService {
@@ -20,6 +20,9 @@ export class ProjectService {
 
   async getProjectById(id: string) {
     const project = await this.projectRepo.findOne({ id: id });
+    if (!project) {
+      throw new NotFoundError('Project not found.');
+    }
     const projectDto = this.mapToDto(project);
     return projectDto;
   }
@@ -28,7 +31,7 @@ export class ProjectService {
     //validate if project date range is valid.
     if (validateDateRange(data.startDate, data.endDate) == false) {
       throw new ValidationError(
-        'endDate cannot be earlier than startDate',
+        'Please check if date is valid data and endDate is greater than startDate',
         PROJECT_ERROR_CODE.INVALID_DATE
       );
     }
