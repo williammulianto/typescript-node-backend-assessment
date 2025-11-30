@@ -100,7 +100,7 @@ describe('Project API Integration Tests', () => {
       expect(getIdAfterDelete.status).toBe(404);
 
       const getAllAfterDelete = await request(app).get(`/projects`);
-      expect(getIdAfterUpdate.body).toBe([]);
+      expect(getAllAfterDelete.body.length).toBe(0);
     });
   });
 });
