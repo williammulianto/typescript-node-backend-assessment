@@ -12,8 +12,15 @@ export class AppError extends Error {
 }
 
 export class ValidationError extends AppError {
-  constructor(message: string, errorCode = 'VALIDATION_ERROR') {
+  errors?: Array<{ field: string; message: string }>;
+
+  constructor(
+    message: string,
+    errorCode = 'VALIDATION_ERROR',
+    errors?: Array<{ field: string; message: string }>,
+  ) {
     super(message, errorCode, 400);
+    this.errors = errors;
   }
 }
 

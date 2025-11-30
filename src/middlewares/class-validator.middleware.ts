@@ -13,8 +13,17 @@ export const validateDto = (dtoClass: any) => {
     });
 
     if (errors.length > 0) {
-      const message = Object.values(errors[0].constraints)[0];
-      return next(new ValidationError(message));
+      const errorDetails = errors.map((error) => ({
+        field: error.property,
+        message: Object.values(error.constraints || {})[0] as string,
+      }));
+
+      const message =
+        errorDetails.length === 1
+          ? errorDetails[0].message
+          : `Validation failed on ${errorDetails.length} field(s)`;
+
+      return next(new ValidationError(message, 'VALIDATION_ERROR', errorDetails));
     }
 
     req.body = dtoObj;

@@ -1,7 +1,7 @@
 // middlewares/error.middleware.ts
 import { Request, Response, NextFunction } from 'express';
 import { applicationConfig } from 'utils/config';
-import { AppError } from 'utils/errors';
+import { AppError, ValidationError } from 'utils/errors';
 import { Logger } from 'utils/logger';
 
 const logger = new Logger('RouteErrorHandler');
@@ -27,10 +27,16 @@ export const errorHandler = (
   }
 
   if (err instanceof AppError) {
-    return res.status(err.status).json({
+    const response: any = {
       errorCode: err.errorCode,
       message: err.message,
-    });
+    };
+
+    if (err instanceof ValidationError && err.errors) {
+      response.errors = err.errors;
+    }
+
+    return res.status(err.status).json(response);
   }
 
   return res.status(500).json({
