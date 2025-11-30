@@ -7,7 +7,8 @@ let app: Express;
 
 describe('API Endpoints', () => {
   beforeAll(async () => {
-    app = await initTestApp();
+    const testApp = await initTestApp();
+    app = testApp.app;
   });
 
   describe('GET /nonexistent', () => {

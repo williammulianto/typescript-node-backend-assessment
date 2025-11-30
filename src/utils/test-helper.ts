@@ -16,5 +16,5 @@ export async function initTestApp() {
   const bootstrap = new Bootstrap(db, TEST_PORT);
   bootstrap.init();
 
-  return bootstrap.getApp();
+  return { app: bootstrap.getApp(), db: db };
 }
