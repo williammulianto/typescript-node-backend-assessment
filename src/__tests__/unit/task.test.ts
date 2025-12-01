@@ -472,7 +472,6 @@ describe('TaskService Unit Tests', () => {
       vi.mocked(mockTaskRepo.find).mockResolvedValue([]);
 
       await taskService.findOverdueTasks();
-
     });
   });
 
