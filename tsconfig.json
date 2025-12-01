@@ -14,7 +14,8 @@
       "utils/*": ["utils/*"],
       "entities/*": ["entities/*"],
       "modules/*": ["modules/*"],
-      "middlewares/*": ["middlewares/*"]
+      "middlewares/*": ["middlewares/*"],
+      "jobs/*": ["jobs/*"]
     }
   },
   "include": ["src/**/*"]

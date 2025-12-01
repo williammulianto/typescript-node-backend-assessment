@@ -22,6 +22,7 @@ export default defineConfig({
       entities: path.resolve(__dirname, 'src/entities'),
       modules: path.resolve(__dirname, 'src/modules'),
       middlewares: path.resolve(__dirname, 'src/middlewares'),
+      jobs: path.resolve(__dirname, 'src/jobs'),
     },
   },
 });

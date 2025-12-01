@@ -8,9 +8,11 @@ import { TaskService } from 'modules/tasks/task.service';
 import { TaskController } from 'modules/tasks/task.controller';
 import { TaskRoute } from 'modules/tasks/task.route';
 import { errorHandler } from 'middlewares/error.middleware';
+import { OverdueTasksJob } from 'jobs/overdue-tasks.job';
 
 export class Bootstrap {
   private app: Express;
+  private overdueTasksJob: OverdueTasksJob;
 
   constructor(
     private db: Database,
@@ -39,11 +41,14 @@ export class Bootstrap {
     const taskService = new TaskService(
       this.db.taskRepository,
       this.db.projectRepository,
-      this.db.em,
+      this.db.em
     );
     const taskController = new TaskController(taskService);
     const taskRoute = new TaskRoute(taskController);
     this.app.use(taskRoute.prefix, taskRoute.route);
+
+    this.overdueTasksJob = new OverdueTasksJob(this.db.em);
+    this.overdueTasksJob.start();
   }
 
   public start() {

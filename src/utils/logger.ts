@@ -5,7 +5,7 @@ import { join } from 'path';
 export class Logger {
   private logger: PinoLogger;
 
-  constructor(context: string) {
+  constructor(private context: string) {
     const logLevel = applicationConfig.server.environment == 'development' ? 'debug' : 'info';
 
     const transports: TransportMultiOptions = {
@@ -29,7 +29,7 @@ export class Logger {
             frequency: 'daily',
             mkdir: true,
             base: {
-              context: context,
+              context: this.context,
             },
             level: logLevel,
           },
@@ -40,16 +40,24 @@ export class Logger {
     const transport = pino.transport(transports);
     this.logger = pino(transport);
   }
-  debug(message: string, meta?: any) {
-    this.logger.debug(meta ?? {}, message);
+
+  private meta(meta?: any) {
+    return { context: this.context, ...(meta ?? {}) };
   }
+
   info(message: string, meta?: any) {
-    this.logger.info(meta ?? {}, message);
+    this.logger.info(this.meta(meta), message);
   }
-  warn(message: string, meta?: any) {
-    this.logger.warn(meta ?? {}, message);
-  }
+
   error(message: string, meta?: any) {
-    this.logger.error(meta ?? {}, message);
+    this.logger.error(this.meta(meta), message);
+  }
+
+  debug(message: string, meta?: any) {
+    this.logger.debug(this.meta(meta), message);
+  }
+
+  warn(message: string, meta?: any) {
+    this.logger.warn(this.meta(meta), message);
   }
 }
