@@ -1,0 +1,164 @@
+{
+  "info": {
+    "name": "project_task",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "bruno",
+      "event": []
+    },
+    {
+      "name": "Projects",
+      "item": [
+        {
+          "name": "Get All Projects",
+          "event": [],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{url}}/projects"
+          }
+        },
+        {
+          "name": "Create Project",
+          "event": [],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": "{{url}}/projects",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"New Project\",\n  \"description\": \"This is a sample project description.\",\n  \"isArchived\": false,\n  \"startDate\": \"2025-03-01T00:00:00.000Z\",\n  \"endDate\": \"2025-04-01T00:00:00.000Z\"\n  \n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Get By Id",
+          "event": [],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{url}}/projects"
+          }
+        },
+        {
+          "name": "Update Project",
+          "event": [],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": "{{url}}/projects/927727ad-db51-42b1-9610-44d7d5a25688",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"asd\",\n  \"description\": \"This is a sample project description.\",\n  \"isArchived\": false,\n  \"startDate\": \"2025-01-01T00:00:00.000Z\",\n  \"endDate\": \"2025-02-01T00:00:00.000Z\"\n  \n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Delete Project",
+          "event": [],
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": "{{url}}/projects/927727ad-db51-42b1-9610-44d7d5a25688",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"asd\",\n  \"description\": \"This is a sample project description.\",\n  \"isArchived\": false,\n  \"startDate\": \"2025-01-01T00:00:00.000Z\",\n  \"endDate\": \"2025-02-01T00:00:00.000Z\"\n  \n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Tasks",
+      "item": [
+        {
+          "name": "Get By Id",
+          "event": [],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{url}}/tasks/a2dfefd5-a299-4208-97e7-113dd230e5cf"
+          }
+        },
+        {
+          "name": "Get By Project Id",
+          "event": [],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{url}}/tasks/project/a2dfefd5-a299-4208-97e7-113dd230e5cf"
+          }
+        },
+        {
+          "name": "Create Task",
+          "event": [],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": "{{url}}/tasks",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"New Task\",\n  \"description\": \"This is a sample task description.\",\n  \"status\": \"PENDING\",\n  \"dueDate\": \"2024-12-31T00:00:00.000Z\",\n  \"projectId\": \"a2dfefd5-a299-4208-97e7-113dd230e5cf\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Update Task",
+          "event": [],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": "{{url}}/tasks/a2dfefd5-a299-4208-97e7-113dd230e5cf",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Updated Task Name\",\n  \"description\": \"Updated task description.\",\n  \"status\": \"IN_PROGRESS\",\n  \"dueDate\": \"2025-12-31T00:00:00.000Z\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Delete Task",
+          "event": [],
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": "{{url}}/tasks/a4235ad2-0170-40f7-825e-e45672272fc5"
+          }
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "url",
+      "value": "",
+      "type": "default"
+    }
+  ]
+}

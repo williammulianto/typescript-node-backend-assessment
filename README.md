@@ -164,11 +164,13 @@ POST /tasks
 }
 ```
 
-### Bruno API Collection
+### Bruno/Postman API Collection
 
 This project includes a Bruno collection for testing all API endpoints:
 
 The collection includes pre-configured requests for all endpoints with example payloads.
+
+The postman collection are exported from bruno.
 
 ## Scheduled Jobs (Cron)
 
