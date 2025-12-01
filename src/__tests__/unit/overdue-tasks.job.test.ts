@@ -42,7 +42,7 @@ describe('OverdueTasksJob', () => {
       mockFindOverdueTask.mockResolvedValue([{ id: 'task-1' }]);
       mockMarkTaskAsOverdue.mockResolvedValue(1);
 
-      let cronCallback: Function;
+      let cronCallback: string | cron.TaskFn;
       vi.mocked(cron.schedule).mockImplementation((expr, cb) => {
         cronCallback = cb;
         return { stop: vi.fn() } as any;
@@ -50,7 +50,7 @@ describe('OverdueTasksJob', () => {
 
       overdueTasksJob.start();
 
-      // Call the cron callback and wait for it
+      // @ts-ignore
       await cronCallback!();
 
       expect(mockFindOverdueTask).toHaveBeenCalled();
@@ -60,13 +60,14 @@ describe('OverdueTasksJob', () => {
     it('should not mark tasks if none are overdue', async () => {
       mockFindOverdueTask.mockResolvedValue([]);
 
-      let cronCallback: Function;
+      let cronCallback: string | cron.TaskFn;
       vi.mocked(cron.schedule).mockImplementation((expr, cb) => {
         cronCallback = cb;
         return { stop: vi.fn() } as any;
       });
 
       overdueTasksJob.start();
+      // @ts-ignore
       await cronCallback!();
 
       expect(mockFindOverdueTask).toHaveBeenCalled();

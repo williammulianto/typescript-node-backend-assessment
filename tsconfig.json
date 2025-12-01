@@ -3,19 +3,20 @@
     "module": "NodeNext",
     "moduleResolution": "NodeNext",
     "target": "ES2020",
-    "baseUrl": "src",
+    "baseUrl": "./",
     "noImplicitAny": true,
     "sourceMap": true,
+    "declaration": true,
     "emitDecoratorMetadata": true,
     "esModuleInterop": true,
     "experimentalDecorators": true,
     "outDir": "dist",
     "paths": {
-      "utils/*": ["utils/*"],
-      "entities/*": ["entities/*"],
-      "modules/*": ["modules/*"],
-      "middlewares/*": ["middlewares/*"],
-      "jobs/*": ["jobs/*"]
+      "utils/*": ["src/utils/*"],
+      "entities/*": ["src/entities/*"],
+      "modules/*": ["src/modules/*"],
+      "middlewares/*": ["src/middlewares/*"],
+      "jobs/*": ["src/jobs/*"]
     }
   },
   "include": ["src/**/*"]

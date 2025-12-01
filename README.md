@@ -15,4 +15,3 @@ npm install
 - **Language**: TypeScript
 - **Framework**: Express 5
 - **Testing**: Vitest + Supertest
-- **Linting**: ESLint + Prettier

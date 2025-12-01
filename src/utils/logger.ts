@@ -21,7 +21,6 @@ export class Logger {
           },
         },
 
-        // ===== Target 2: Daily rotating file logs =====
         {
           target: 'pino-roll',
           options: {

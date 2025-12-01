@@ -10,6 +10,7 @@ export default defineConfig({
   // https://github.com/mikro-orm/mikro-orm/discussions/5804#discussioncomment-10024728
   // Not recommend using path as compiler can be tricky.
   entities: [Project, Task],
+  entitiesTs: [Project, Task],
   migrations: {
     tableName: 'mikro_orm_migrations',
     path: './dist/migrations',
