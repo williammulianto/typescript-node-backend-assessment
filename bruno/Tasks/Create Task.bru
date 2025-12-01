@@ -1,0 +1,21 @@
+meta {
+  name: Create Task
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{url}}/tasks
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "name": "New Task",
+    "description": "This is a sample task description.",
+    "status": "PENDING",
+    "dueDate": "2025-12-31T00:00:00.000Z",
+    "projectId": "PROJECT_ID_HERE"
+  }
+}

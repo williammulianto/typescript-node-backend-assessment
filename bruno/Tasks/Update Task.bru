@@ -1,0 +1,20 @@
+meta {
+  name: Update Task
+  type: http
+  seq: 5
+}
+
+post {
+  url: {{url}}/tasks/TASK_ID_HERE
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "name": "Updated Task Name",
+    "description": "Updated task description.",
+    "status": "IN_PROGRESS",
+    "dueDate": "2025-12-31T00:00:00.000Z"
+  }
+}

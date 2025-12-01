@@ -4,6 +4,9 @@ import { Database } from 'utils/db';
 import { ProjectService } from 'modules/projects/project.service';
 import { ProjectController } from 'modules/projects/project.controller';
 import { ProjectRoute } from 'modules/projects/project.route';
+import { TaskService } from 'modules/tasks/task.service';
+import { TaskController } from 'modules/tasks/task.controller';
+import { TaskRoute } from 'modules/tasks/task.route';
 import { errorHandler } from 'middlewares/error.middleware';
 
 export class Bootstrap {
@@ -32,6 +35,15 @@ export class Bootstrap {
     const projectController = new ProjectController(projectService);
     const projectRoute = new ProjectRoute(projectController);
     this.app.use(projectRoute.prefix, projectRoute.route);
+
+    const taskService = new TaskService(
+      this.db.taskRepository,
+      this.db.projectRepository,
+      this.db.em,
+    );
+    const taskController = new TaskController(taskService);
+    const taskRoute = new TaskRoute(taskController);
+    this.app.use(taskRoute.prefix, taskRoute.route);
   }
 
   public start() {
